@@ -1,5 +1,11 @@
 package meta
 
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/ont-bizsuite/addonstep/pkg/path"
+	"github.com/ont-bizsuite/addonstep/pkg/service"
+)
+
 // AddonConfigSteps contain the total steps to config this addon
 type AddonConfigSteps struct {
 	Steps []*Step `json:"steps"`
@@ -16,4 +22,44 @@ type Step struct {
 
 	IsRollbackTx []bool   `json:"is_rollback_tx_lst,omitempty"` // one step may need multiple rollback steps, the length of the array indicate the total rollback steps, and each value indicate wether the step is a transaction step
 	RollbackPath []string `json:"rollback_path_lst,omitempty"`  // rollback request HTTP path
+}
+
+var (
+	steps = &AddonConfigSteps{}
+)
+
+var (
+	StepPay = &Step{
+		Name:        "Operating fee",
+		Description: "Operating fee",
+		Path:        path.PayPath,
+		IsTx:        true,
+		Params:      service.PaySample,
+	}
+)
+
+func init() {
+	// fill the steps
+	steps.Steps = append(steps.Steps, StepPay)
+
+	// ensure the index
+	// NOTE: start from 1, not 0
+	for i := range steps.Steps {
+		steps.Steps[i].Index = int32(i) + 1
+	}
+}
+
+func RegistPath(r *gin.Engine, sc *service.ServiceConfig) error {
+	// meta
+	r.GET(path.MetaSteps, AddonSteps)
+
+	// service
+	r.POST(path.PayPath, sc.TransferMoney)
+	r.POST(path.PayCallbackPath, sc.FeeBack)
+
+	return nil
+}
+
+func AddonSteps(c *gin.Context) {
+	c.JSON(200, steps)
 }
