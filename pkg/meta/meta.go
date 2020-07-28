@@ -14,6 +14,6 @@ type Step struct {
 	Path        string                 `json:"path"`        // the relative HTTP path for current steps
 	IsTx        bool                   `json:"tx"`          // is this step a transaction? addon server will use different way to process transaction step and none transaction step, see readme for detail description
 
-	IsRollbackTx []bool   `json:"is_rollback_tx_lst"` // one step may need multiple rollback steps, the length of the array indicate the total rollback steps, and each value indicate wether the step is a transaction step
-	RollbackPath []string `json:"rollback_path_lst"`  // rollback request HTTP path
+	IsRollbackTx []bool   `json:"is_rollback_tx_lst,omitempty"` // one step may need multiple rollback steps, the length of the array indicate the total rollback steps, and each value indicate wether the step is a transaction step
+	RollbackPath []string `json:"rollback_path_lst,omitempty"`  // rollback request HTTP path
 }
