@@ -51,8 +51,8 @@ type (
 	// AsyncPathOutput for async output
 	AsyncPathOutput struct {
 		BaseResp
-		Result interface{} `json:"result"`
-		State  int         `json:"state"`
+		RenderResult interface{} `json:"render_result"`
+		State        int         `json:"state"`
 	}
 )
 
