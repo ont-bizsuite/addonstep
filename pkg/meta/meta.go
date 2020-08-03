@@ -70,17 +70,7 @@ var (
 	}
 )
 
-func init() {
-	// fill the steps
-	steps.Steps = append(steps.Steps, StepPay)
-
-	// ensure the index
-	// NOTE: start from 1, not 0
-	for i := range steps.Steps {
-		steps.Steps[i].Index = int32(i) + 1
-	}
-}
-
+// RegistPath is only for demo, call your own's addon register path!
 func RegistPath(r *gin.Engine, sc *service.ServiceConfig) error {
 	// meta
 	r.GET(path.MetaSteps, AddonSteps)
@@ -94,4 +84,15 @@ func RegistPath(r *gin.Engine, sc *service.ServiceConfig) error {
 
 func AddonSteps(c *gin.Context) {
 	c.JSON(200, steps)
+}
+
+func AppendStep(s *Step) {
+	// ensure steps
+	defer func() {
+		for i := range steps.Steps {
+			steps.Steps[i].Index = int32(i) + 1
+		}
+	}()
+
+	steps.Steps = append(steps.Steps, s)
 }
