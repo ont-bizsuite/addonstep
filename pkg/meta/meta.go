@@ -22,7 +22,39 @@ type Step struct {
 
 	IsRollbackTx []bool   `json:"is_rollback_tx_lst,omitempty"` // one step may need multiple rollback steps, the length of the array indicate the total rollback steps, and each value indicate wether the step is a transaction step
 	RollbackPath []string `json:"rollback_path_lst,omitempty"`  // rollback request HTTP path
+
+	AsyncPath string `json:"async_path"`
 }
+
+const (
+	// StatusInit ...
+	StatusInit = 1
+	// StatusDone ...
+	StatusDone = 2
+	// StatusNE ...
+	StatusNE = 3
+)
+
+type (
+	// AsyncPathInput for async input
+	AsyncPathInput struct {
+		TenantID string `json:"tenant_id"`
+		StepIdx  int    `json:"step_idx"`
+	}
+
+	// BaseResp ...
+	BaseResp struct {
+		Code int    `json:"code"`
+		Msg  string `json:"msg"`
+	}
+
+	// AsyncPathOutput for async output
+	AsyncPathOutput struct {
+		BaseResp
+		Result interface{} `json:"result"`
+		State  int         `json:"state"`
+	}
+)
 
 var (
 	steps = &AddonConfigSteps{}
