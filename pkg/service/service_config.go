@@ -12,6 +12,9 @@ type ServiceConfig struct {
 	GasLimit         uint64
 	ChainRemoteURL   []string
 	Account          *ontsdk.Account // addon fee transfer to address
+	// ons related
+	ONSContractAddress string
+	ONSUpLevelAccount  *ontsdk.Account // normally this is the same as collect money address
 }
 
 type ServiceConfigOption func(*ServiceConfig)
