@@ -14,7 +14,7 @@ type ServiceConfig struct {
 	Account          *ontsdk.Account // addon fee transfer to address
 	// ons related
 	ONSContractAddress string
-	ONSUpLevelAccount  *ontsdk.Account // normally this is the same as collect money address
+	ONSUpLevelAccount  *ontsdk.Account // normally this is the same as collect money address, when register ons, one must provide the the upper level permission
 }
 
 type ServiceConfigOption func(*ServiceConfig)

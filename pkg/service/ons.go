@@ -44,7 +44,6 @@ func (sc *ServiceConfig) RegisterONS(c *gin.Context) {
 		"registerDomain",
 		[]interface{}{
 			fmt.Sprintf("%s.node.ont", param.Domain),
-			// fmt.Sprintf("did:ont:%s", thirdLevelAct.Address.ToBase58()),
 			param.OntID,
 			1,
 			time.Now().Add(86400000 * time.Second).Unix(),
