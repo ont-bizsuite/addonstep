@@ -23,6 +23,7 @@ type Step struct {
 	IsRollbackTx []bool   `json:"is_rollback_tx_lst,omitempty"` // one step may need multiple rollback steps, the length of the array indicate the total rollback steps, and each value indicate wether the step is a transaction step
 	RollbackPath []string `json:"rollback_path_lst,omitempty"`  // rollback request HTTP path
 
+	Async     bool   `json:"async"`
 	AsyncPath string `json:"async_path"`
 }
 
