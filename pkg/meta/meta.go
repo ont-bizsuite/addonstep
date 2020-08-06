@@ -55,6 +55,24 @@ type (
 		RenderResult interface{} `json:"render_result"`
 		State        int         `json:"state"`
 	}
+
+	// ConfigInfo ...
+	ConfigInfo struct {
+		AddonID  string `json:"addon_id"`
+		TenantID string `json:"tenant_id"`
+		Net      string `json:"net"`
+		Product  string `json:"product"`
+	}
+	// ConfigInput ...
+	ConfigInput struct {
+		Info ConfigInfo `json:"info"`
+	}
+	// ConfigOutput ...
+	ConfigOutput struct {
+		BaseResp
+		SdkURL    string      `json:"sdk_url"`
+		SdkConfig interface{} `json:"sdk_config"`
+	}
 )
 
 var (
