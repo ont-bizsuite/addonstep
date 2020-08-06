@@ -67,11 +67,15 @@ type (
 	ConfigInput struct {
 		Info ConfigInfo `json:"info"`
 	}
+	// ConfigResult ...
+	ConfigResult struct {
+		SdkURL    string      `json:"sdk_url"`
+		SdkConfig interface{} `json:"sdk_config"`
+	}
 	// ConfigOutput ...
 	ConfigOutput struct {
 		BaseResp
-		SdkURL    string      `json:"sdk_url"`
-		SdkConfig interface{} `json:"sdk_config"`
+		Result ConfigResult `json:"result"`
 	}
 )
 
