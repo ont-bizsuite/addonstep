@@ -25,6 +25,7 @@ type Step struct {
 
 	Async     bool   `json:"async"`
 	AsyncPath string `json:"async_path"`
+	Async     bool   `json:"async"`
 }
 
 const (

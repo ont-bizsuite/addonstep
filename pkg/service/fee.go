@@ -202,7 +202,7 @@ func (pc *ServiceConfig) payme() (string, error) {
 }
 
 type SendTxParam struct {
-	SingedTx string      `json:"signedTx"`
+	SingedTx string      `json:"signed_tx"`
 	Prev     interface{} `json:"prev"`
 }
 
@@ -224,12 +224,14 @@ func (pc *ServiceConfig) FeeBack(c *gin.Context) {
 		c.JSON(500, gin.H{
 			"message": "invalid tx",
 		})
+		return
 	}
 	mtx, err := tx.IntoMutable()
 	if err != nil {
 		c.JSON(500, gin.H{
 			"message": "invalid tx, into mutable fail",
 		})
+		return
 	}
 	hash, err := sdk.SendTransaction(mtx)
 	log.Printf("fee tx hash: %s", hash.ToHexString())
