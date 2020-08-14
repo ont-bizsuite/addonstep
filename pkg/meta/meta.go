@@ -25,7 +25,6 @@ type Step struct {
 
 	Async     bool   `json:"async"`
 	AsyncPath string `json:"async_path"`
-	Async     bool   `json:"async"`
 }
 
 const (
@@ -91,6 +90,13 @@ var (
 		Path:        path.PayPath,
 		IsTx:        true,
 		Params:      service.PaySample,
+	}
+	StepONS = &Step{
+		Name:        "register ONS",
+		Description: "ontology name service register",
+		Path:        path.ONSPath,
+		IsTx:        true,
+		Params:      service.RegisterONSSample,
 	}
 )
 

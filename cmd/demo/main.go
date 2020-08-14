@@ -14,6 +14,8 @@ func main() {
 	// FIXME: service config should init with detail option, this is just the demo, we ignore all the config detail info
 	sc := service.NewConfig()
 
+	meta.AppendStep(meta.StepPay)
+	meta.AppendStep(meta.StepONS)
 	if err := meta.RegistPath(r, sc); err != nil {
 		log.Fatal(err)
 	}

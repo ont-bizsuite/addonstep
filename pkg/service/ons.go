@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	SampleRegisterONS = &RegisterONSParam{
+	RegisterONSSample = &RegisterONSParam{
 		Domain: "",
 	}
 )
